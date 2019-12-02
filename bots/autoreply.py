@@ -4,13 +4,14 @@
 import tweepy
 import logging
 from config import create_api
-from tarotgenerator import generate_tarot_reading
+import pycorpora
+from tarotgenerator import TarotReader
 import time
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-quests = Request()
+tarot = TarotReader()
 
 def check_mentions(api, keywords, since_id, check_time):
     logger.info("Retrieving mentions")
@@ -30,7 +31,7 @@ def check_mentions(api, keywords, since_id, check_time):
 
             api.update_status(
             #    status="Please reach us via DM",
-                status=make_reply(tweet, generate_tarot_reading()),
+                status=make_reply(tweet, tarot.generate_tarot_reading()),
                 in_reply_to_status_id=tweet.id,
             )
     return new_since_id
