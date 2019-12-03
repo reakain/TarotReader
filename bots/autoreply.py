@@ -31,7 +31,7 @@ def check_mentions(api, keywords, since_id, check_time):
 
             api.update_status(
             #    status="Please reach us via DM",
-                status=make_reply(tweet, tarot.generate_tarot_reading()),
+                status=make_reply(tweet, tarot.get_tarot_reading()),
                 in_reply_to_status_id=tweet.id,
             )
     return new_since_id
